@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  web:
+    build:
+      context: ./
+    image: k8sinaday_web:1.0.0
+    container_name: web
+    networks:
+      - k8sinaday
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf # mount the nginx.conf this repo to the default nginx config location in the container
+
+# use the same docker network for all applications in the example
+networks:
+  k8sinaday:
+    name: k8sinaday
